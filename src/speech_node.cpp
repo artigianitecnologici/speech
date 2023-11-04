@@ -81,7 +81,7 @@ void SpeechNode::voiceCallback(const speech::voice& voice)
 }
 //---------------------------------------------------------------------------
 
-// If finshed speaking delay until the /robot_face/talking_finished topic is published
+// If finshed speaking delay until the /speech/talking_finished topic is published
 void SpeechNode::speakingFinished()
 {
     if(finshed_speaking_ == true)
@@ -106,7 +106,7 @@ SpeechNode::SpeechNode()
 {
     voice_sub_ = n_.subscribe("/speech/to_speak", 5, &SpeechNode::voiceCallback, this);
 
-    talking_finished_pub_ = n_.advertise<std_msgs::String>("/robot_face/talking_finished", 5);
+    talking_finished_pub_ = n_.advertise<std_msgs::String>("/speech/talking_finished", 5);
     
     finshed_speaking_ = false;
 }
@@ -127,13 +127,13 @@ int main(int argc, char **argv)
     std::string node_name = ros::this_node::getName();
 	ROS_INFO("%s started", node_name.c_str());
 	
-	// We want a delay from when a speech finishes to when /robot_face/talking_finished is published
+	// We want a delay from when a speech finishes to when /speech/talking_finished is published
 	
 	ros::Rate r(speech_node->LOOP_FREQUENCY_);	
 	
     while(ros::ok())
     {
-        // See if /robot_face/talking_finished should be published published
+        // See if /speech/talking_finished should be published published
         speech_node->speakingFinished();
         
         ros::spinOnce();
