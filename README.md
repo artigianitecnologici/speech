@@ -16,5 +16,5 @@ Topics:
 * `/speech/to_speak`:  
   Subscribes `speech/voice` with either text containing the words to speak or wav containing the path of the wav file to play.
   
-* `/robot_face/talking_finshed`:  
+* `/speech/talking_finshed`:  
   Publishes `std_msgs/String` to indicate that the talking or playback of the existing wav file is complete.
