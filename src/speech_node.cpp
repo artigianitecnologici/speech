@@ -103,9 +103,9 @@ void SpeechNode::speakingFinished()
 // Constructor 
 SpeechNode::SpeechNode()
 {
-    voice_sub_ = n_.subscribe("/speech/say", 5, &SpeechNode::voiceCallback, this);
+    voice_sub_ = n_.subscribe("/social/say", 5, &SpeechNode::voiceCallback, this);
    
-    talking_finished_pub_ = n_.advertise<std_msgs::String>("/speech/talking_finished", 5);
+    talking_finished_pub_ = n_.advertise<std_msgs::String>("/social/talking_finished", 5);
     
     finshed_speaking_ = false;
 }
