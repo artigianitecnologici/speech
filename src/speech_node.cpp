@@ -15,10 +15,6 @@ void SpeechNode::reconfCallback(speech::SpeechConfig &config, uint32_t level)
     norm_ = config.norm;
 }
 //---------------------------------------------------------------------------
-void ToSpeakCallback(const std_msgs::String::ConstPtr& msg)
-{
-   ROS_DEBUG("I speak: [%s]", msg->data.c_str());
- }
 // This callback is for when a voice message received
 void SpeechNode::voiceCallback(const speech::voice& voice)
 {               
@@ -108,8 +104,7 @@ void SpeechNode::speakingFinished()
 SpeechNode::SpeechNode()
 {
     voice_sub_ = n_.subscribe("/speech/say", 5, &SpeechNode::voiceCallback, this);
-    ros::Subscriber sub = n_.subscribe("/speech/to_speak", 1000, ToSpeakCallback);
-
+   
     talking_finished_pub_ = n_.advertise<std_msgs::String>("/speech/talking_finished", 5);
     
     finshed_speaking_ = false;
